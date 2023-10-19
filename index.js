@@ -3,9 +3,14 @@ const axios = require('axios').default;
 const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
+
 // const port = process.env.PORT || 3000;
 const port = 4000;
 
+// include flex_msg.js
+const { get_msg } = require('./flex_msg');
+
+console.log(get_msg())
 const env = dotenv.config().parsed;
 const config = {
     channelAccessToken: env.ACCESS_TOKEN,
@@ -24,14 +29,36 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 });
 
 const handleEvent = (event) => {
-    console.log(event)
     // repyr msg back
     if(event.type === 'message' && event.message.type === 'text'){
         return client.replyMessage(event.replyToken, {
-            type: 'text',
-            text: event.message.text
+            "type": "text",
+            "text": event.message.text,
+        });
+            
+     
+    }
+
+    // //unsend event
+    // if(event.type === 'unsend'){
+    //     return client.pushMessage(event.source.userId, {
+    //         "type": "text",
+    //         "text": "มีคนยกเลิกข้อความ",
+    //     });
+    // }
+    // get line account info 
+    if(event.type === 'unsend'){
+        return client.getProfile(event.source.userId).then((profile) => {
+            console.log(profile)
+            return client.pushMessage(event.source.userId, {
+                "type": "text",
+                "text": `คุณ ${profile.displayName} ยกเลิกข้อความ`,
+            });
         });
     }
+
+    // send msg to userId
+   
 }
 
 app.listen(port, () => {
