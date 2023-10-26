@@ -7,3 +7,4 @@ docker compose up -d
 echo "up..."
 sleep 3
 echo 1
+echo 2
