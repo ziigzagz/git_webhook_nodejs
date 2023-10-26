@@ -1,3 +1,5 @@
-echo "123"
+echo "starting..."
+sleep 3
+docker compose down
 sleep 10
-echo "456"
+docker compose up -d
