@@ -1,6 +1,6 @@
 var http = require("http");
 var createHandler = require("github-webhook-handler");
-const { exec } = require("child_process");
+var shell = require('shelljs');
 var handler = createHandler({ path: "/webhook", secret: "myhashsecret" });
 
 http
@@ -22,14 +22,9 @@ handler.on("push", function (event) {
     event.payload.repository.name,
     event.payload.ref
   );
-
-  var yourscript = exec("sh cmd.sh", (error, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    if (error !== null) {
-      console.log(`exec error: ${error}`);
-    }
-  });
+  console.log("Shell Executing")
+  shell.exec('sh cmd.sh');
+  console.log("Shell Executed")
 });
 
 handler.on("issues", function (event) {
