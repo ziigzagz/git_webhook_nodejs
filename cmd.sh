@@ -6,3 +6,4 @@ sleep 10
 docker compose up -d
 echo "up..."
 sleep 3
+echo 1
