@@ -21,6 +21,8 @@
     "express": "^4.18.2",
     "github-webhook-handler": "^1.0.0",
     "http": "^0.0.1-security",
-    "jssoup": "^0.0.15"
+    "jssoup": "^0.0.15",
+    "node-gitlab-webhook": "^1.0.6",
+    "shelljs": "^0.8.5"
   }
 }
