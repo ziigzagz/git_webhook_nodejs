@@ -26,6 +26,6 @@ sleep 60
 
 docker compose up -d
 echo "up..."
-cd /home/umayplus/gitlab_webhook
+cd /home/umayplus/git_webhook_nodejs
 
 
