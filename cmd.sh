@@ -15,7 +15,7 @@ docker compose down
 echo "Down..."
 sleep 5
 
-docker system prune --all
+docker system prune --all -f
 echo "Prune..."
 sleep 3
 
